@@ -1,7 +1,7 @@
 import React from "react";
 
 const Form = () => {
-  return <h1>FORM</h1>;
+  return <h1> from </h1>;
 };
 
 export default Form;
