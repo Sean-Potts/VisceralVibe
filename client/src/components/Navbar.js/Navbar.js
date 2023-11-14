@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { AppBar, Typography, Toolbar, Avatar, Button } from "@material-ui/core";
 import useStyles from "./styles";
 import memories from "../../images/memories.png";
 import { Link } from "react-router-dom";
+
 const Navbar = () => {
   const classes = useStyles();
 
-  const user = null;
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  console.log(user);
+  const logout = () => {};
+  useEffect(() => {
+    const token = user?.token;
+    //
+    setUser(JSON.parse(localStorage.getItem("profile")));
+  }, []);
 
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
@@ -23,7 +31,7 @@ const Navbar = () => {
         <img className={classes.image} src={memories} alt="icon" height="60" />
       </div>
       <Toolbar className={classes.toolbar}>
-        {user ? (
+        {/* {user ? (
           <div className={classes.profile}>
             <Avatar
               className={classes.purple}
@@ -39,20 +47,21 @@ const Navbar = () => {
               variant="contained"
               className={classes.logout}
               color="secondary"
+              onClick={logout}
             >
               Logout
             </Button>
           </div>
-        ) : (
-          <Button
-            component={Link}
-            to="/auth"
-            className={classes.logout}
-            color="secondary"
-          >
-            Sign In
-          </Button>
-        )}
+        ) : ( */}
+        <Button
+          component={Link}
+          to="/auth"
+          className={classes.logout}
+          color="secondary"
+        >
+          Sign In
+        </Button>
+        {/* )} */}
       </Toolbar>
     </AppBar>
   );
