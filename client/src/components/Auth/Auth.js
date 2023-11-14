@@ -9,18 +9,19 @@ import {
   TextField,
 } from "@material-ui/core";
 import { GoogleLogin } from "@react-oauth/google";
-
+import jwt_decode from "jwt-decode";
 import Input from "./input";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Icon from "./icon";
 import useStyles from "./styles";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 const Auth = () => {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
   const dispatch = useDispatch();
-
+  const history = useHistory();
   const handleShowPassword = () =>
     setShowPassword((prevShowPassword) => !prevShowPassword);
 
@@ -34,11 +35,29 @@ const Auth = () => {
   };
 
   const googleSuccess = async (res) => {
-    const result = res?.profileObj;
-    const token = res?.tokenId;
-    console.log(res);
+    // const result = res?.profileObj;
+    const token = res?.credential;
+
+    // had to do a fix using jwt_decode or else i cant get the correct information
+    // console.log(res);
+
+    // console.log("Token: " + token);
+    const result = jwt_decode(res.credential);
+
+    // console.log(result);
+    // console.log("ID: " + result.sub);
+    // console.log("ID: " + result.sub);
+
+    // console.log("Full Name: " + result.name);
+    // console.log("Given Name: " + result.given_name);
+    // console.log("Family Name: " + result.family_name);
+    // console.log("Image URL: " + result.picture);
+    // console.log("Email: " + result.email);
+    // console.log("success");
     try {
       dispatch({ type: "AUTH", data: { result, token } });
+      // takes the user to the main home screen
+      history.push("/");
     } catch (error) {
       console.log(error);
     }

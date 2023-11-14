@@ -1,4 +1,6 @@
 export const CREATE = "CREATE";
+// Reason is for miss spelling errors
+
 export const UPDATE = "UPDATE";
 export const DELETE = "DELETE";
 export const FETCH_ALL = "FETCH_ALL";
