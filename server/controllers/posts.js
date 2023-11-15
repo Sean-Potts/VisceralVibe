@@ -33,7 +33,7 @@ export const createPosts = async (req, res) => {
   const newPostMessage = new PostMessage({
     ...post,
     creator: req.userId,
-    createdAt: new Data().toISOString(),
+    createdAt: new Date().toISOString(),
   });
 
   try {
@@ -87,11 +87,9 @@ export const likePost = async (req, res) => {
   } else {
     post.likes = post.likes.filter((id) => id !== String(req.userId));
   }
-  const updatedPost = await PostMessage.findByIdAndUpdate(
-    id,
-    { post },
-    { new: true }
-  );
+  const updatedPost = await PostMessage.findByIdAndUpdate(id, post, {
+    new: true,
+  });
 
   res.json(updatedPost);
 };
