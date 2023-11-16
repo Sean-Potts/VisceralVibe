@@ -88,6 +88,8 @@ const Auth = () => {
     console.log("Google Sing In was unsuccessful. Try Again Later");
   };
 
+  const googleError = () => console.log("Google Sign in was unsuccessful");
+
   return (
     <Container component="main" maxWidth="xs">
       <Paper className={classes.paper} elevation={3}>
