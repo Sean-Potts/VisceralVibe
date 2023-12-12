@@ -15,7 +15,7 @@ app.use(
     origin: ["https://highlight-mern-frontend.vercel.app"],
     methods: ["POST", "GET"],
     credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"],
+    // allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
@@ -35,7 +35,3 @@ mongoose
     )
   )
   .catch((error) => console.log(`${error} did not connect`));
-
-app.get("/", (req, res) => {
-  res.json("APP is RUNNING.");
-});

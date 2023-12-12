@@ -1,7 +1,7 @@
 {
         "routes": [
           {
-            "src": "/posts",
+            "src": "/",
             "methods": ["GET"],
             "headers": {
               "Access-Control-Allow-Origin": "https://highlight-mern-frontend.vercel.app",
