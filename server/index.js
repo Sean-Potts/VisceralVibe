@@ -15,7 +15,7 @@ app.use(
     origin: ["https://highlight-mern-frontend.vercel.app"],
     methods: ["POST", "GET"],
     credentials: true,
-    // allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
