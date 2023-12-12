@@ -18,13 +18,11 @@ app.use(
     credentials: true,
   })
 );
-
-app.get("/", (req, res) => {
-  res.json("APP is RUNNING.");
-});
+app.use(express.json());
 
 app.use("/posts", postRoutes);
 app.use("/user", userRoutes);
+
 const PORT = process.env.PORT || 5000;
 
 mongoose
@@ -35,3 +33,7 @@ mongoose
     )
   )
   .catch((error) => console.log(`${error} did not connect`));
+
+app.get("/", (req, res) => {
+  res.json("APP is RUNNING.");
+});
