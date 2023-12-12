@@ -13,9 +13,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
 app.use(
   cors({
-    origin: [
-      "https://highlight-mern-frontend-sean-potts-projects.vercel.app/posts",
-    ],
+    origin: ["https://highlight-mern-frontend.vercel.app/posts/"],
     methods: ["POST", "GET"],
     credentials: true,
   })
