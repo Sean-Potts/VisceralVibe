@@ -10,21 +10,11 @@ const app = express();
 dotenv.config();
 
 // Enable CORS for all routes
-app.use((req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "https://highlight-mern-frontend.vercel.app"
-  );
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
-  next();
-});
-
 app.use(
   cors({
-    origin: "https://highlight-mern-frontend.vercel.app",
-    methods: "GET, POST, PUT, DELETE",
-    allowedHeaders: "Content-Type",
+    origin: ["https://highlight-mern-frontend.vercel.app"],
+    methods: ["POST", "GET"],
+    credentials: true,
   })
 );
 
