@@ -12,9 +12,7 @@ dotenv.config();
 // Enable CORS for all routes
 app.use(
   cors({
-    origin: [
-      "https://highlight-mern-frontend-ll9atkvoc-sean-potts-projects.vercel.app",
-    ],
+    origin: ["https://highlight-mern-frontend.vercel.app"],
     methods: ["POST", "GET"],
     credentials: true,
   })

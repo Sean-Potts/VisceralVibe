@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "https://highlight-mern.vercel.app" });
+const API = axios.create({
+  baseURL: "https://highlight-mern-frontend.vercel.app",
+});
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("profile")) {
@@ -11,6 +13,7 @@ API.interceptors.request.use((req) => {
 
   return req;
 });
+
 export const fetchPost = (id) => API.get(`/posts/${id}`);
 export const fetchPosts = (page) => API.get(`/posts?page=${page}`);
 export const fetchPostsBySearch = (searchQuery) =>
