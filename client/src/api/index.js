@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://highlight-mern-frontend.vercel.app",
+  baseURL: "https://highlight-mern.vercel.app",
 });
 
 API.interceptors.request.use((req) => {
