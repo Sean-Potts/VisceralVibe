@@ -9,9 +9,6 @@ import userRoutes from "./routes/users.js";
 const app = express();
 dotenv.config();
 
-app.use(bodyParser.json({ limit: "30mb", extended: true }));
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-
 // Enable CORS for all routes
 app.use((req, res, next) => {
   res.header(
@@ -22,6 +19,18 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
+
+app.use(
+  cors({
+    origin: "https://highlight-mern-frontend.vercel.app",
+    methods: "GET, POST, PUT, DELETE",
+    allowedHeaders: "Content-Type",
+  })
+);
+
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+
 app.use(express.json());
 
 app.use("/posts", postRoutes);
