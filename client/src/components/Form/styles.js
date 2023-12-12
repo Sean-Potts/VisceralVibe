@@ -20,5 +20,17 @@ export default makeStyles((theme) => ({
   },
   buttonSubmit: {
     marginBottom: 10,
+    marginTop: "10px",
+    color: "black",
+    background: "hsla(183, 100%, 53%, 1)",
+
+    background:
+      "linear-gradient(90deg, hsla(183, 100%, 53%, 1) 0%, hsla(214, 100%, 68%, 1) 100%)",
+  },
+  clearButton: {
+    color: "black",
+    background: "hsla(308, 96%, 72%, 1)",
+    background:
+      "linear-gradient(90deg, hsla(308, 96%, 72%, 1) 0%, hsla(300, 100%, 50%, 1) 100%)",
   },
 }));

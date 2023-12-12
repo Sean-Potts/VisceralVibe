@@ -31,6 +31,8 @@ const PostDetails = () => {
     }
   }, [post]);
 
+  var isVideo = null;
+
   if (!post) return null;
 
   if (isLoading) {
@@ -39,24 +41,30 @@ const PostDetails = () => {
         <CircularProgress size="7em" />
       </Paper>
     );
+  } else {
+    isVideo = post.selectedFile.startsWith("data:video");
+    console.log(isVideo);
   }
 
   const recommendedPosts = posts.filter(({ _id }) => _id != post._id);
   const openPost = (_id) => history.push(`/posts/${_id}`);
   console.log("POST DETAILS");
   return (
-    <Paper style={{ padding: "20px", borderRadius: "15px" }} elevation={6}>
+    <Paper
+      style={{
+        padding: "20px",
+        borderRadius: "15px",
+        color: "#E0E0E0",
+        backgroundColor: "#333333",
+      }}
+      elevation={6}
+    >
       <div className={classes.card}>
         <div className={classes.section}>
           <Typography variant="h3" component="h2">
             {post.title}
           </Typography>
-          <Typography
-            gutterBottom
-            variant="h6"
-            color="textSecondary"
-            component="h2"
-          >
+          <Typography gutterBottom variant="h6" component="h2">
             {post.tags.map((tag) => `#${tag} `)}
           </Typography>
           <Typography gutterBottom variant="body1" component="p">
@@ -66,23 +74,43 @@ const PostDetails = () => {
           <Typography variant="body1">
             {moment(post.createdAt).fromNow()}
           </Typography>
-          <Divider style={{ margin: "20px 0" }} />
-          <Typography variant="body1">
-            <strong>Realtime Chat - coming soon!</strong>
-          </Typography>
-          <Divider style={{ margin: "20px 0" }} />
+          <Divider className={classes.borderColor} />
+          {/* <Divider style={{ margin: "20px 0" }} /> */}
           <CommentSection post={post} />
-          <Divider style={{ margin: "20px 0" }} />
+          <Divider className={classes.borderColor} />
         </div>
+
         <div className={classes.imageSection}>
-          <img
-            className={classes.media}
-            src={
-              post.selectedFile ||
-              "https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png"
-            }
-            alt={post.title}
-          />
+          {isVideo ? (
+            // Render video content
+            <video
+              width="520px"
+              height="420px"
+              controls
+              style={{
+                borderRadius: "15px",
+                boxShadow: "rgba(0, 0, 0, 0.4) 3px 3px 10px",
+              }}
+            >
+              <source src={post.selectedFile} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          ) : (
+            // Render non-video content
+            <img
+              src={
+                post.selectedFile ||
+                "https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png"
+              }
+              width="520px"
+              height="420px"
+              style={{
+                objectFit: "cover",
+                borderRadius: "15px",
+                boxShadow: "rgba(0, 0, 0, 0.4) 3px 3px 10px",
+              }}
+            />
+          )}
         </div>
       </div>
       {recommendedPosts.length && (
@@ -90,32 +118,87 @@ const PostDetails = () => {
           <Typography gutterBottom variant="h5">
             You might also like:
           </Typography>
-          <Divider />
-          <div className={classes.recommendedPosts}>
-            {recommendedPosts.map(
-              ({ title, message, name, likes, selectedFile, _id }) => (
+          <Divider className={classes.borderColor} />
+
+          <div
+            className={classes.recommendedPosts}
+            style={{ overflow: "auto" }}
+          >
+            {recommendedPosts
+              .slice(0, 6)
+              .map(({ title, message, name, likes, selectedFile, _id }) => (
                 <div
-                  style={{ margin: "20px", cursor: "pointer" }}
+                  style={{
+                    margin: "20px",
+                    cursor: "pointer",
+                    border: "2px",
+                    backgroundColor: "#292929",
+
+                    borderRadius: "15px",
+                  }}
                   on
                   onClick={() => openPost(_id)}
                   key={_id}
+                  elevation={6}
                 >
-                  <Typography gutterBottom variant="h6">
+                  <Typography
+                    gutterBottom
+                    variant="h6"
+                    style={{ paddingLeft: "10px", paddingRight: "10px" }}
+                  >
                     {title}
                   </Typography>
-                  <Typography gutterBottom variant="subtitle2">
+                  <Typography
+                    gutterBottom
+                    variant="subtitle2"
+                    style={{ paddingLeft: "10px", paddingRight: "10px" }}
+                  >
                     {name}
                   </Typography>
-                  <Typography gutterBottom variant="subtitle2">
+                  <Typography
+                    gutterBottom
+                    variant="subtitle2"
+                    style={{ paddingLeft: "10px", paddingRight: "10px" }}
+                  >
                     {message}
                   </Typography>
-                  <Typography gutterBottom variant="subtitle1">
-                    {likes.length}
+                  <Typography
+                    gutterBottom
+                    variant="subtitle1"
+                    style={{ paddingLeft: "10px", paddingRight: "10px" }}
+                  >
+                    Likes: {likes.length}
                   </Typography>
-                  <img src={selectedFile} width="200px" />
+                  {selectedFile.startsWith("data:video") ? (
+                    <video
+                      width="220px"
+                      height="120px"
+                      style={{
+                        objectFit: "cover",
+                        borderRadius: "15px",
+                        padding: "10px",
+                        marginTop: "auto",
+                      }}
+                      src={selectedFile}
+                    ></video>
+                  ) : (
+                    <img
+                      src={
+                        selectedFile ||
+                        "https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png"
+                      }
+                      width="220px"
+                      height="120px"
+                      style={{
+                        objectFit: "cover",
+                        borderRadius: "15px",
+                        padding: "10px",
+                        marginTop: "auto",
+                      }}
+                    />
+                  )}
                 </div>
-              )
-            )}
+              ))}
           </div>
         </div>
       )}

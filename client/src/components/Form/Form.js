@@ -12,6 +12,7 @@ const Form = ({ currentId, setCurrentId }) => {
     message: "",
     tags: "",
     selectedFile: "",
+    type: "",
   });
   const post = useSelector((state) =>
     currentId ? state.posts.find((message) => message._id === currentId) : null
@@ -71,19 +72,15 @@ const Form = ({ currentId, setCurrentId }) => {
         <Typography variant="h6">
           {currentId ? `Editing "${post.title}"` : "Creating a Memory"}
         </Typography>
-        {/* <TextField
-          name="creator"
-          variant="outlined"
-          label="Creator"
-          fullWidth
-          value={postData.creator}
-          onChange={(e) =>
-            setPostData({ ...postData, creator: e.target.value })
-          }
-        /> */}
+
         <TextField
           name="title"
           variant="outlined"
+          InputLabelProps={{
+            style: {
+              color: "#EBEBEB",
+            },
+          }}
           label="Title"
           fullWidth
           value={postData.title}
@@ -92,6 +89,11 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField
           name="message"
           variant="outlined"
+          InputLabelProps={{
+            style: {
+              color: "#EBEBEB",
+            },
+          }}
           label="Message"
           fullWidth
           multiline
@@ -104,6 +106,11 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField
           name="tags"
           variant="outlined"
+          InputLabelProps={{
+            style: {
+              color: "#EBEBEB",
+            },
+          }}
           label="Tags (coma separated)"
           fullWidth
           value={postData.tags}
@@ -132,7 +139,7 @@ const Form = ({ currentId, setCurrentId }) => {
         </Button>
         <Button
           variant="contained"
-          color="secondary"
+          className={classes.clearButton}
           size="small"
           onClick={clear}
           fullWidth

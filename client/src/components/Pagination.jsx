@@ -16,20 +16,20 @@ const Paginate = ({ page }) => {
   }, [page]);
 
   return (
-    <Pagination
-      classes={{ ul: classes.ul }}
-      count={numberOfPages}
-      page={cur || 1}
-      variant="outlined"
-      color="primary"
-      renderItem={(item) => (
-        <PaginationItem
-          {...item}
-          component={Link}
-          to={`/posts?page=${item.page}`}
-        />
-      )}
-    />
+    <div className={classes.root}>
+      <Pagination
+        classes={{ ul: classes.ul }}
+        count={numberOfPages}
+        page={cur || 1}
+        renderItem={(item) => (
+          <PaginationItem
+            {...item}
+            component={Link}
+            to={`/posts?page=${item.page}`}
+          />
+        )}
+      />
+    </div>
   );
 };
 

@@ -2,6 +2,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import { deepPurple } from "@material-ui/core/colors";
 
 export default makeStyles((theme) => ({
+  root: {
+    "& .MuiPaper-root": {
+      backgroundColor: "#333333",
+      color: "#EBEBEB",
+    },
+  },
   appBar: {
     borderRadius: 15,
     margin: "30px 0",
@@ -10,6 +16,7 @@ export default makeStyles((theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
     padding: "10px 50px",
+
     [theme.breakpoints.down("sm")]: {
       flexDirection: "column",
     },
@@ -45,6 +52,10 @@ export default makeStyles((theme) => ({
   },
   logout: {
     marginLeft: "20px",
+    color: "black",
+    background: "hsla(308, 96%, 72%, 1)",
+    background:
+      "linear-gradient(90deg, hsla(308, 96%, 72%, 1) 0%, hsla(300, 100%, 50%, 1) 100%)",
   },
   userName: {
     display: "flex",

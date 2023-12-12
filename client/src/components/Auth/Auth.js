@@ -16,6 +16,7 @@ import Icon from "./icon";
 import useStyles from "./styles";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+
 import { signin, signup } from "../../actions/auth";
 // initial state of the form data
 const initialState = {
@@ -29,12 +30,16 @@ const initialState = {
 const Auth = () => {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordCon, setShowPasswordCon] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
   const [formData, setFromData] = useState(initialState);
   const dispatch = useDispatch();
   const history = useHistory();
   const handleShowPassword = () =>
     setShowPassword((prevShowPassword) => !prevShowPassword);
+
+  const handleShowPasswordCon = () =>
+    setShowPasswordCon((prevShowPasswordCon) => !prevShowPasswordCon);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -97,26 +102,27 @@ const Auth = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography variant="h5">{isSignup ? "Sign up" : "Sign In"}</Typography>
+
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             {isSignup && (
               <>
+                <div></div>
                 <Input
                   name="firstName"
                   label="First Name"
                   handleChange={handleChange}
                   autoFocus
-                  half
                 />
 
                 <Input
                   name="lastName"
                   label="Last Name"
                   handleChange={handleChange}
-                  half
                 />
               </>
             )}
+
             <Input
               name="email"
               label="Email Address"
@@ -135,7 +141,8 @@ const Auth = () => {
                 name="confirmPassword"
                 label="Repeat Password"
                 handleChange={handleChange}
-                type="password"
+                type={showPassword ? "text" : "password"}
+                handleShowPasswordCon={handleShowPasswordCon}
               />
             )}
           </Grid>
@@ -169,7 +176,7 @@ const Auth = () => {
                 onFailure={googleFailure}
                 cookiePolicy="single_host_origin"
               />
-              <Button onClick={switchMode}>
+              <Button onClick={switchMode} className={classes.accountButton}>
                 {isSignup
                   ? "Already have an account? Sign In"
                   : "Don't have an account? Sign Up"}
