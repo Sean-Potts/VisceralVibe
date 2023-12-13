@@ -21,7 +21,9 @@ app.use(
 );
 app.use("/posts", postRoutes);
 app.use("/user", userRoutes);
-
+app.get("/", (req, res) => {
+  res.json("hi");
+});
 const PORT = process.env.PORT || 5000;
 
 mongoose
