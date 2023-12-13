@@ -11,15 +11,15 @@ dotenv.config();
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-// app.use(
-//   cors({
-//     origin: ["https://highlight-mern-frontend.vercel.app"],
-//     methods: ["POST", "GET"],
-//     credentials: true,
-//     allowedHeaders: ["Content-Type", "Authorization"],
-//   })
-// );
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://mern-v2.vercel.app"],
+    methods: ["POST", "GET"],
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+//app.use(cors());
 
 app.use("/posts", postRoutes);
 app.use("/user", userRoutes);
