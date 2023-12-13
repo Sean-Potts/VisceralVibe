@@ -25,7 +25,9 @@ app.use("/posts", postRoutes);
 app.use("/user", userRoutes);
 
 const PORT = process.env.PORT || 5000;
-
+app.get("/", (req, res) => {
+  res.send("Hello from the server!");
+});
 mongoose
   .connect(
     "mongodb+srv://seanpotts:CentrumSophia123@cluster0.zyk9qmj.mongodb.net/?retryWrites=true&w=majority",
