@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://mern-v2-uih6-sean-potts-projects.vercel.app",
+  baseURL: "https://mern-v2-uih6.vercel.app",
 });
 
 API.interceptors.request.use((req) => {
