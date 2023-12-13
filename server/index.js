@@ -11,14 +11,16 @@ dotenv.config();
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(
-  cors({
-    origin: ["https://highlight-mern-frontend.vercel.app"],
-    methods: ["POST", "GET"],
-    credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+// app.use(
+//   cors({
+//     origin: ["https://highlight-mern-frontend.vercel.app"],
+//     methods: ["POST", "GET"],
+//     credentials: true,
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//   })
+// );
+app.use(cors());
+
 app.use("/posts", postRoutes);
 app.use("/user", userRoutes);
 app.get("/", (req, res) => {
@@ -27,7 +29,10 @@ app.get("/", (req, res) => {
 const PORT = process.env.PORT || 5000;
 
 mongoose
-  .connect(process.env.CONNECTION_URL, {})
+  .connect(
+    "mongodb+srv://seanpotts:CentrumSophia123@cluster0.zyk9qmj.mongodb.net/?retryWrites=true&w=majority",
+    {}
+  )
   .then(() =>
     app.listen(PORT, () =>
       console.log(`Server Running on Port: http://localhost:${PORT}`)

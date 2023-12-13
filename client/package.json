@@ -25,8 +25,11 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0"
   },
+  "engines": {
+    "node": "20.10.0"
+  },
   "scripts": {
-    "start": "set NODE_OPTIONS=--openssl-legacy-provider&& react-scripts start",
+    "start": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
     "build": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
