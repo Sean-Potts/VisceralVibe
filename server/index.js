@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
   res.send("Hello from the server!");
 });
 mongoose
-  .connect(env.CONNECTION_URL, {})
+  .connect(process.env.CONNECTION_URL, {})
   .then(() =>
     app.listen(PORT, () =>
       console.log(`Server Running on Port: http://localhost:${PORT}`)
