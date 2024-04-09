@@ -1,8 +1,8 @@
-# Personal Portfolio Website
+# Full-stack (MERN) Social Media Web Application
 
 This project can be found at https://mern-v2-sean-potts-projects.vercel.app
 
-It is hosted on Vercel and was Created using the MERN Stack.  
+It is hosted on Vercel and was created using the MERN Stack.  
 
 # Project Uses
 
